@@ -19,7 +19,7 @@ const HeaderBar = (props) => {
             <Nav.Link href="/about">About</Nav.Link>
           </Nav>
         </Navbar.Collapse>
-        <Button variant="outline-secondary">Cart</Button>
+        <Button variant="outline-secondary" onClick={props.onCartClick}>Cart</Button>
       </Container>
     </Navbar>
   );
