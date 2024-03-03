@@ -1,5 +1,5 @@
 import { Container, Navbar, Nav } from "react-bootstrap";
-import HeaderBar from "./components/HeaderBar";
+import HeaderBar from "./components/HeaderBar/HeaderBar";
 
 function App() {
   return (
