@@ -1,3 +1,5 @@
-.my-navbar{
-    height: 4rem;
+.my-navbar {
+  height: 4rem;
+  z-index: 100;
 }
+

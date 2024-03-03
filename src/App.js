@@ -1,10 +1,11 @@
-import { Container, Navbar, Nav } from "react-bootstrap";
 import HeaderBar from "./components/HeaderBar/HeaderBar";
+import ProductCards from "./components/Products/ProductCards";
 
 function App() {
   return (
     <>
       <HeaderBar />
+      <ProductCards />
     </>
   );
 }
