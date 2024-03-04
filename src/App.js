@@ -1,26 +1,33 @@
+import React, { useState } from "react";
 import HeaderBar from "./components/HeaderBar/HeaderBar";
 import ProductCards from "./components/Products/ProductCards";
 import Cart from "./components/Cart/Cart";
-import { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import About from "./components/About/About";
 import CartProvider from "./store/CartProvider";
 
 function App() {
-  const [showCart, setShowCart] = useState(false)
+  const [showCart, setShowCart] = useState(false);
 
-    function handleClose(){
-        setShowCart(false)
-    }
+  function handleClose() {
+    setShowCart(false);
+  }
 
-    function handleOpen(){
-      setShowCart(true)
-    }
+  function handleOpen() {
+    setShowCart(true);
+  }
 
   return (
-    <CartProvider>
-      {showCart && <Cart onClose={handleClose} show={showCart}/>}
-      <HeaderBar onCartClick={handleOpen}/>
-      <ProductCards />
-    </CartProvider>
+    <Router>
+      <CartProvider>
+        {showCart && <Cart onClose={handleClose} show={showCart} />}
+        <HeaderBar onCartClick={handleOpen} />
+        <Routes>
+          <Route path="/" element={<ProductCards />} />
+          <Route path="/about" element={<About />} />
+        </Routes>
+      </CartProvider>
+    </Router>
   );
 }
 
