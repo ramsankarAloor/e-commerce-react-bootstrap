@@ -5,9 +5,9 @@ import CartContext from '../../store/cart-context'
 const Cart=props=>{
     const cartcontext = useContext(CartContext)
 
-    const cartArray = cartcontext.cart.map((item)=>{
+    const cartArray = cartcontext.cart.map((item, index)=>{
         return (
-            <tr key={item.id}>
+            <tr key={index}>
                 <td><img src={item.imageUrl} alt="product" width='50px'></img>{item.title}</td>
                 <td>{item.price}</td>
                 <td>{item.quantity}</td>
