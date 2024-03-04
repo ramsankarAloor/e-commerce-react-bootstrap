@@ -5,8 +5,6 @@ import CartContext from '../../store/cart-context'
 const Cart=props=>{
     const cartcontext = useContext(CartContext)
 
-    
-
     const cartArray = cartcontext.cart.map((item)=>{
         return (
             <tr key={item.id}>
@@ -17,8 +15,6 @@ const Cart=props=>{
             </tr>
         )
     })
-
-    console.log(cartArray)
 
     return(
         <Modal show={props.show} onHide={props.onClose}>

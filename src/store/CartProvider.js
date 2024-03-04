@@ -2,40 +2,31 @@ import { useState } from "react";
 import CartContext from "./cart-context";
 
 const CartProvider = (props) => {
-  const [cart, setCart] = useState([
-    {
-      id: 1,
-      title: "Colors",
-      price: 100,
-      imageUrl:
-        "https://prasadyash2411.github.io/ecom-website/img/Album%201.png",
-      quantity: 2,
-    },
-    {
-      id: 2,
-      title: "Black and white Colors",
-      price: 50,
-      imageUrl:
-        "https://prasadyash2411.github.io/ecom-website/img/Album%202.png",
-      quantity: 3,
-    },
-    {
-      id: 3,
-      title: "Yellow and Black Colors",
-      price: 70,
-      imageUrl:
-        "https://prasadyash2411.github.io/ecom-website/img/Album%203.png",
-      quantity: 1,
-    },
-  ]);
-
+  const [cart, setCart] = useState([]);
+  
   const cartContext = {
     cart: [...cart],
     addToCart,
     removeFromCart,
   };
 
-  function addToCart() {}
+  function addToCart(item) {
+    let flag=0
+    let res = cart.map((product)=>{
+      if(product.id === item.id){
+        product.quantity ++
+        flag=1
+      }
+      return product
+    })
+
+    if(flag===0){
+      item = {...item, quantity: 1}
+      setCart([...cart, item])
+    }else{
+      setCart(res)
+    }
+  }
 
   function removeFromCart(id) {
     let res = cart.filter((item)=> item.id !== id)

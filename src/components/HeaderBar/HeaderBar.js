@@ -1,7 +1,13 @@
-import { Navbar, Container, Nav, Button } from "react-bootstrap";
+import { Navbar, Container, Nav, Button, Badge } from "react-bootstrap";
 import styles from "./HeaderBar.module.css";
+import { useContext } from "react";
+import CartContext from "../../store/cart-context";
 
 const HeaderBar = (props) => {
+
+  const cartcontext = useContext(CartContext)
+  const cartArr = [...cartcontext.cart]
+  const badgeNum = cartArr.reduce((acc, product)=> acc+product.quantity, 0)
   return (
     <Navbar
       variant="light"
@@ -19,7 +25,7 @@ const HeaderBar = (props) => {
             <Nav.Link href="/about">About</Nav.Link>
           </Nav>
         </Navbar.Collapse>
-        <Button variant="outline-secondary" onClick={props.onCartClick}>Cart</Button>
+        <Button variant="outline-secondary" onClick={props.onCartClick}>Cart <Badge bg="secondary">{badgeNum}</Badge></Button>
       </Container>
     </Navbar>
   );
