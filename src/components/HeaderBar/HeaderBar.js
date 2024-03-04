@@ -23,10 +23,10 @@ const HeaderBar = (props) => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <NavLink to="/" className="nav-link" activeClassName="active">
+            <NavLink to="/" className="nav-link" activeclassname="active">
               Home
             </NavLink>
-            <NavLink to="/about" className="nav-link" activeClassName="active">
+            <NavLink to="/about" className="nav-link" activeclassname="active">
               About
             </NavLink>
           </Nav>
