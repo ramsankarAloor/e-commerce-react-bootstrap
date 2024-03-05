@@ -10,8 +10,6 @@ const CartProvider = (props) => {
     removeFromCart,
   };
 
-  console.log("cart => ", cartContext.cart);
-
   function addToCart(item) {
     let flag = 0;
     let res = cart.map((product) => {
