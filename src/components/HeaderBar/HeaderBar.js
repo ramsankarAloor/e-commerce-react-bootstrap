@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Navbar, Container, Nav, Button, Badge } from "react-bootstrap";
 import styles from "./HeaderBar.module.css";
-import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 import CartContext from "../../store/cart-context";
 
 const HeaderBar = (props) => {
@@ -23,13 +23,13 @@ const HeaderBar = (props) => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <NavLink to="/" className="nav-link" activeclassname="active">
+            <NavLink to="/" className="nav-link" exact activeClassName={styles.active}>
               Home
             </NavLink>
-            <NavLink to="/about" className="nav-link" activeclassname="active">
+            <NavLink to="/about" className="nav-link" activeClassName={styles.active}>
               About
             </NavLink>
-            <NavLink to="/contact" className="nav-link" activeclassname="active">Contact</NavLink>
+            <NavLink to="/contact" className="nav-link" activeClassName={styles.active}>Contact</NavLink>
           </Nav>
         </Navbar.Collapse>
         <Button variant="outline-secondary" onClick={props.onCartClick}>
