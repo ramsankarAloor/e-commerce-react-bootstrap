@@ -21,29 +21,29 @@ function App() {
   }
 
   return (
-    <CartProvider>
-      {showCart && <Cart onClose={handleClose} show={showCart} />}
-      <HeaderBar onCartClick={handleOpen} />
-      <Switch>
-        <Route exact path="/">
-          <Redirect to="/products"></Redirect>
-        </Route>
-        <ProductsProvider>
+    <ProductsProvider>
+      <CartProvider>
+        {showCart && <Cart onClose={handleClose} show={showCart} />}
+        <HeaderBar onCartClick={handleOpen} />
+        <Switch>
+          <Route exact path="/">
+            <Redirect to="/products"></Redirect>
+          </Route>
           <Route exact path="/products">
             <ProductCards />
           </Route>
           <Route path="/products/:productId">
             <ProductDetail />
           </Route>
-        </ProductsProvider>
-        <Route path="/about">
-          <About />
-        </Route>
-        <Route path="/contact">
-          <Contact />
-        </Route>
-      </Switch>
-    </CartProvider>
+          <Route path="/about">
+            <About />
+          </Route>
+          <Route path="/contact">
+            <Contact />
+          </Route>
+        </Switch>
+      </CartProvider>
+    </ProductsProvider>
   );
 }
 
