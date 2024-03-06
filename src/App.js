@@ -7,6 +7,7 @@ import About from "./components/About/About";
 import CartProvider from "./store/CartProvider";
 import Contact from "./components/Contact/Contact";
 import ProductDetail from "./components/ProductDetail";
+import ProductsProvider from "./store/ProductsProvider";
 
 function App() {
   const [showCart, setShowCart] = useState(false);
@@ -27,12 +28,14 @@ function App() {
         <Route exact path="/">
           <Redirect to="/products"></Redirect>
         </Route>
-        <Route exact path="/products">
-          <ProductCards />
-        </Route>
-        <Route path="/products/:productId">
-          <ProductDetail />
-        </Route>
+        <ProductsProvider>
+          <Route exact path="/products">
+            <ProductCards />
+          </Route>
+          <Route path="/products/:productId">
+            <ProductDetail />
+          </Route>
+        </ProductsProvider>
         <Route path="/about">
           <About />
         </Route>
