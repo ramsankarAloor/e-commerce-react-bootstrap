@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import HeaderBar from "./components/HeaderBar/HeaderBar";
 import ProductCards from "./components/Products/ProductCards";
 import Cart from "./components/Cart/Cart";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import About from "./components/About/About";
 import CartProvider from "./store/CartProvider";
 import Contact from "./components/Contact/Contact";
+import ProductDetail from "./components/ProductDetail";
 
 function App() {
   const [showCart, setShowCart] = useState(false);
@@ -24,7 +25,13 @@ function App() {
       <HeaderBar onCartClick={handleOpen} />
       <Switch>
         <Route exact path="/">
+          <Redirect to="/products"></Redirect>
+        </Route>
+        <Route exact path="/products">
           <ProductCards />
+        </Route>
+        <Route path="/products/:productId">
+          <ProductDetail />
         </Route>
         <Route path="/about">
           <About />
