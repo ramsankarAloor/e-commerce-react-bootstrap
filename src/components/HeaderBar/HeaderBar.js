@@ -30,6 +30,9 @@ const HeaderBar = (props) => {
               About
             </NavLink>
             <NavLink to="/contact" className="nav-link" activeClassName={styles.active}>Contact</NavLink>
+            <NavLink to="/auth" className="nav-link" activeClassName={styles.active}>
+              Login
+            </NavLink>
           </Nav>
         </Navbar.Collapse>
         <Button variant="outline-secondary" onClick={props.onCartClick}>

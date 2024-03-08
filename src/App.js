@@ -8,6 +8,7 @@ import CartProvider from "./store/CartProvider";
 import Contact from "./components/Contact/Contact";
 import ProductDetail from "./components/ProductDetail";
 import ProductsProvider from "./store/ProductsProvider";
+import AuthForm from "./components/AuthForm";
 
 function App() {
   const [showCart, setShowCart] = useState(false);
@@ -40,6 +41,9 @@ function App() {
           </Route>
           <Route path="/contact">
             <Contact />
+          </Route>
+          <Route path="/auth">
+            <AuthForm />
           </Route>
         </Switch>
       </CartProvider>
