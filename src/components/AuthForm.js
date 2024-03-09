@@ -7,14 +7,14 @@ import {
   FormLabel,
 } from "react-bootstrap";
 import classes from "./AuthForm.module.css";
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
+import AuthContext from "../store/auth-context";
 
 const apiKey = process.env.REACT_APP_FIREBASE_API_KEY;
 
 const AuthForm = (props) => {
-    console.log('key', apiKey)
+  const authctx = useContext(AuthContext)
   const [isLogin, setIsLogin] = useState(true);
-  console.log('state=>', isLogin)
   const emailRef = useRef();
   const passwordRef = useRef();
 
@@ -24,6 +24,29 @@ const AuthForm = (props) => {
     const enteredPassword = passwordRef.current.value;
 
     if (isLogin) {
+      try {
+        const response = await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`, {
+          method: "POST",
+          body: JSON.stringify({
+            email: enteredEmail,
+            password: enteredPassword,
+            returnSecureToken: true,
+          }),
+          headers: {
+            "Content-type": "application/json",
+          },
+        });
+        if (!response.ok) {
+          const data = await response.json();
+          alert(data.error.message);
+        }
+
+        const data = await response.json();
+        authctx.login(data.idToken)
+        
+      } catch (error) {
+        console.log(error.message);
+      }
     } else {
       try {
         const res = await fetch(
@@ -42,22 +65,17 @@ const AuthForm = (props) => {
         );
 
         if (!res.ok) {
-          const data = await res.json()
-          console.log(data)
-          alert(data.error.message)
+          const data = await res.json();
+          alert(data.error.message);
         }
-
-        const data = await res.json()
-        console.log(data)
-
       } catch (error) {
         console.log(error.message);
       }
     }
 
-    emailRef.current.value = ''
-    passwordRef.current.value = ''
-  };
+    emailRef.current.value = "";
+    passwordRef.current.value = "";
+  }
   return (
     <Container className="mt-3">
       <h3>{isLogin ? "Login" : "Signup"}</h3>
