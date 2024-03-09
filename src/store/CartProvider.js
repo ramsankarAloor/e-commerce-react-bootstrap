@@ -1,7 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import CartContext from "./cart-context";
+import AuthContext from "./auth-context";
+
+const baseUrl = 'https://crudcrud.com/api/5597a6b3c5244d59bc667a13a4c0bdfd'
 
 const CartProvider = (props) => {
+  const authCtx = useContext(AuthContext)
   const [cart, setCart] = useState([]);
 
   const cartContext = {
@@ -10,7 +14,7 @@ const CartProvider = (props) => {
     removeFromCart,
   };
 
-  function addToCart(item) {
+  async function addToCart(item) {
     let flag = 0;
     let res = cart.map((product) => {
       if (product.id === item.id) {
@@ -26,6 +30,18 @@ const CartProvider = (props) => {
     } else {
       setCart(res);
     }
+
+    const response = await fetch(`${baseUrl}/cart${authCtx.email}`, {
+      method: 'POST',
+      body : JSON.stringify({
+        item
+      }),
+      headers: {
+        'Content-Type' : 'application/json'
+      }
+    })
+
+    console.log(response)
   }
 
   function removeFromCart(id) {

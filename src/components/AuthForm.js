@@ -44,7 +44,11 @@ const AuthForm = (props) => {
         }
 
         const data = await response.json();
-        authctx.login(data.idToken)
+        const email = data.email
+        const cleanedEmail = email.replace(/[.@]/g, "")
+
+        authctx.login(data.idToken, cleanedEmail)
+        
         history.replace('/products')
       } catch (error) {
         console.log(error.message);

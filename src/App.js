@@ -11,6 +11,8 @@ import ProductsProvider from "./store/ProductsProvider";
 import AuthForm from "./components/AuthForm";
 import AuthContext from "./store/auth-context";
 
+const baseUrl = 'https://crudcrud.com/api/5597a6b3c5244d59bc667a13a4c0bdfd'
+
 function App() {
   const authCtx = useContext(AuthContext);
   const [showCart, setShowCart] = useState(false);
@@ -19,7 +21,17 @@ function App() {
     setShowCart(false);
   }
 
-  function handleOpen() {
+  async function handleOpen() {
+    const response = await fetch(`${baseUrl}/cart${authCtx.email}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type' : 'application/json'
+      }
+    })
+
+    const data = await response.json()
+    console.log('cart from db => ', data)
+
     setShowCart(true);
   }
 
