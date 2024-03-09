@@ -8,12 +8,14 @@ import {
 } from "react-bootstrap";
 import classes from "./AuthForm.module.css";
 import { useContext, useRef, useState } from "react";
+import { useHistory } from 'react-router-dom'
 import AuthContext from "../store/auth-context";
 
 const apiKey = process.env.REACT_APP_FIREBASE_API_KEY;
 
 const AuthForm = (props) => {
   const authctx = useContext(AuthContext)
+  const history = useHistory()
   const [isLogin, setIsLogin] = useState(true);
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -43,7 +45,7 @@ const AuthForm = (props) => {
 
         const data = await response.json();
         authctx.login(data.idToken)
-        
+        history.replace('/products')
       } catch (error) {
         console.log(error.message);
       }
