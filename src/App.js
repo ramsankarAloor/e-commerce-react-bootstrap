@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import HeaderBar from "./components/HeaderBar/HeaderBar";
 import ProductCards from "./components/Products/ProductCards";
 import Cart from "./components/Cart/Cart";
@@ -9,8 +9,10 @@ import Contact from "./components/Contact/Contact";
 import ProductDetail from "./components/ProductDetail";
 import ProductsProvider from "./store/ProductsProvider";
 import AuthForm from "./components/AuthForm";
+import AuthContext from "./store/auth-context";
 
 function App() {
+  const authCtx = useContext(AuthContext);
   const [showCart, setShowCart] = useState(false);
 
   function handleClose() {
@@ -28,13 +30,25 @@ function App() {
         <HeaderBar onCartClick={handleOpen} />
         <Switch>
           <Route exact path="/">
-            <Redirect to="/products"></Redirect>
+            {authCtx.isLoggedIn ? (
+              <Redirect to="/products"></Redirect>
+            ) : (
+              <Redirect to="/auth"></Redirect>
+            )}
           </Route>
           <Route exact path="/products">
-            <ProductCards />
+            {authCtx.isLoggedIn ? (
+              <ProductCards />
+            ) : (
+              <Redirect to="/auth"></Redirect>
+            )}
           </Route>
           <Route path="/products/:productId">
-            <ProductDetail />
+            {authCtx.isLoggedIn ? (
+              <ProductDetail />
+            ) : (
+              <Redirect to="/auth"></Redirect>
+            )}
           </Route>
           <Route path="/about">
             <About />
@@ -44,6 +58,9 @@ function App() {
           </Route>
           <Route path="/auth">
             <AuthForm />
+          </Route>
+          <Route path="*">
+            <h3>Page not found</h3>
           </Route>
         </Switch>
       </CartProvider>
